@@ -1,19 +1,19 @@
-require './lib/card'
+require 'lib/card'
 
 class Deck
   attr_reader :cards
 
-  def initialize(num_of_cards, num_of_lands)
+  def initialize(args)
     @cards = []
     land_map = []
 
-    num_of_lands.times do
-      ridx = rand(num_of_cards)
+    args[:lands].times do
+      ridx = rand(args[:cards])
       redo if land_map.include?(ridx)
       land_map << ridx
     end
 
-    num_of_cards.times do |idx|
+    args[:cards].times do |idx|
       @cards << Card.new(:land => land_map.include?(idx))
     end
   end
@@ -25,7 +25,7 @@ end
 
 class DraftDeck < Deck
   def initialize
-    super(40,17)
+    super(:cards => 40, :lands => 17)
   end
 end
 
