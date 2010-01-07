@@ -12,8 +12,8 @@ MANY.times do
     if card.land?
       land_set += 1
     elsif land_set > 0
-      land_set.times do |l|
-        res[l+1] += land_set / (l+1)
+      1.upto(land_set) do |l|
+        res[l] += land_set / l
       end
       land_set = 0
     end
