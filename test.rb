@@ -13,16 +13,12 @@ MANY.times do
     if card.land?
       land_set += 1
     else
-      1.upto(land_set) do |l|
-        res[l] += land_set / l
-      end
       land_set = 0
     end
-  end
 
-  # cover 'land tail' case
-  1.upto(land_set) do |l|
-    res[l] += land_set / l
+    1.upto(land_set) do |l|
+      res[l] += 1
+    end
   end
 end
 
