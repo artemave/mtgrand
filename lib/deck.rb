@@ -1,10 +1,7 @@
 require 'lib/card'
 
-class Deck
-  attr_reader :cards
-
+class Deck < Array
   def initialize(args)
-    @cards = []
     land_map = []
 
     args[:lands].times do
@@ -14,12 +11,12 @@ class Deck
     end
 
     args[:cards].times do |idx|
-      @cards << Card.new(:land => land_map.include?(idx))
+      self << Card.new(:land => land_map.include?(idx))
     end
   end
 
   def draw(num_of_cards = 1)
-    @cards.slice!(0,num_of_cards)
+    slice!(0,num_of_cards)
   end
 end
 
