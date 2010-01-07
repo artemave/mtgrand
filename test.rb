@@ -8,15 +8,21 @@ res = Hash.new {|h,k| h[k] = 0}
 
 MANY.times do
   land_set = 0
+
   DraftDeck.new.each do |card|
     if card.land?
       land_set += 1
-    elsif land_set > 0
+    else
       1.upto(land_set) do |l|
         res[l] += land_set / l
       end
       land_set = 0
     end
+  end
+
+  # cover 'land tail' case
+  1.upto(land_set) do |l|
+    res[l] += land_set / l
   end
 end
 
